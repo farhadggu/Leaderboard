@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "FarhangFanum";
+  src: local("FarhangFanum"),
+    url(../public/fonts/farhangfanum-regular.woff2) format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: FarhangFanum, sans-serif !important;
+  direction: rtl;
+  text-align: right;
+}
+
+body {
+  background: #12123a;
+}
+
+.hexagon {
+  width: 70px;
+  height: 50px;
+  background-color: #171649;
+  position: absolute;
+  transform: rotate(90deg);
+  margin-top: -20px;
+  left: 6%;
+}
+
+.hexagon::before,
+.hexagon::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+}
+
+.hexagon::before {
+  bottom: 100%;
+  border-bottom: 20px solid #171649;
+}
+
+.hexagon::after {
+  top: 100%;
+  width: 0;
+  border-top: 20px solid #171649;
+}
+
+.hexagon > img {
+  position: absolute;
+  top: -9%;
+  left: 10%;
+  width: 60px;
+  transform: rotate(270deg);
+  z-index: 99;
+}
