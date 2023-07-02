@@ -1,0 +1,7 @@
+.parallelogram {
+  width: 100%;
+  height: 60px;
+  transform: skew(-20deg);
+  border: 1px solid #ccc;  
+  border-radius: 10px;
+}

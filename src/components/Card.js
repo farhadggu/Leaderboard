@@ -3,8 +3,9 @@ import React from "react";
 import { BiLogoAirbnb } from "react-icons/bi";
 import { GiTrophyCup } from "react-icons/gi";
 import { MdVerified } from "react-icons/md";
+import styles from "./Card.module.css";
 
-export default function Card({ place }) {
+export default function Card({ place, item }) {
   return (
     <Box
       sx={{
@@ -13,15 +14,16 @@ export default function Card({ place }) {
         borderRadius: "20px",
         border: "1px solid #eee",
       }}
+      // className={styles.card}
     >
       <Box
         sx={{
           background:
-            place == "اول"
+            place == "1"
               ? "radial-gradient(circle, rgba(246,244,171,1) 0%, rgba(226,240,209,1) 35%, rgba(18,18,58,1) 100%)"
-              : place == "دوم"
+              : place == "2"
               ? "radial-gradient(circle, rgba(159,241,234,1) 0%, rgba(239,231,249,1) 35%, rgba(18,18,58,1) 100%)"
-              : place == "سوم"
+              : place == "3"
               ? "radial-gradient(circle, rgba(250,218,193,1) 0%, rgba(226,240,203,1) 35%, rgba(18,18,58,1) 100%)"
               : "",
           height: "80px",
@@ -31,24 +33,23 @@ export default function Card({ place }) {
       >
         <Typography
           sx={{
-            color: "#fff",
             padding: "20px",
             fontSize: "22px",
-            color: "rgba(255, 255, 255, .5)",
+            color: "#000",
           }}
         >
-          {place}
+          {place == 1 ? "اول" : place == 2 ? "دوم" : place == 3 ? "سوم" : ""}
         </Typography>
       </Box>
-      
+
       <Box width="100%" position="relative">
         <Box className="hexagon">
-          {place == "اول" ? (
+          {place == "1" ? (
             <img src={"/rank1.webp"} />
-          ) : place == "دوم" ? (
+          ) : place == "2" ? (
             <img src={"/immortal.webp"} />
-          ) : place == "سوم" ? (
-            <img src={"/immortal.webp"} />
+          ) : place == "3" ? (
+            <img src={"/archon.png"} />
           ) : (
             ""
           )}
@@ -75,12 +76,12 @@ export default function Card({ place }) {
               borderRadius: "5px",
             }}
           >
-            امتیاز : 90{" "}
-            {place == "اول" ? (
+            امتیاز : {item.score}{" "}
+            {place == "1" ? (
               <GiTrophyCup style={{ color: "#f3dc80", fontSize: "18px" }} />
-            ) : place == "دوم" ? (
+            ) : place == "2" ? (
               <GiTrophyCup style={{ color: "#3abef9", fontSize: "18px" }} />
-            ) : place == "سوم" ? (
+            ) : place == "3" ? (
               <GiTrophyCup style={{ color: "#e4c49e", fontSize: "18px" }} />
             ) : (
               ""
@@ -100,7 +101,7 @@ export default function Card({ place }) {
           <Typography
             sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}
           >
-            فرهاد قراگوزلو
+            {item.name}
           </Typography>
           <MdVerified
             style={{
@@ -112,21 +113,86 @@ export default function Card({ place }) {
           />
         </Box>
 
-        <Box display="flex" justifyContent="center" alignItems="center" gap="40px" mt={3}>
-          <Box display="flex" flexDirection="column" alignItems="start" justifyContent="start">
-            <Typography sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}>40</Typography>
-            <Typography sx={{ color: "#fff", color: "#bbb", fontSize: "16px", fontWeight: "bold" }}>اخبار</Typography>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          gap="40px"
+          mt={3}
+        >
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="start"
+            justifyContent="start"
+          >
+            <Typography
+              sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}
+            >
+              {item.news}
+            </Typography>
+            <Typography
+              sx={{
+                color: "#fff",
+                color: "#bbb",
+                fontSize: "16px",
+                fontWeight: "bold",
+              }}
+            >
+              اخبار
+            </Typography>
           </Box>
-          <Box display="flex" flexDirection="column" alignItems="start" justifyContent="start">
-            <Typography sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}>35</Typography>
-            <Typography sx={{ color: "#fff", color: "#bbb", fontSize: "16px", fontWeight: "bold" }}>ابزار</Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="start"
+            justifyContent="start"
+          >
+            <Typography
+              sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}
+            >
+              {item.tool}
+            </Typography>
+            <Typography
+              sx={{
+                color: "#fff",
+                color: "#bbb",
+                fontSize: "16px",
+                fontWeight: "bold",
+              }}
+            >
+              ابزار
+            </Typography>
           </Box>
-          <Box display="flex" flexDirection="column" alignItems="start" justifyContent="start">
-            <Typography sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}>75</Typography>
-            <Typography sx={{ color: "#fff", color: "#bbb", fontSize: "16px", fontWeight: "bold" }}>مقاله</Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="start"
+            justifyContent="start"
+          >
+            <Typography
+              sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}
+            >
+              {item.article}
+            </Typography>
+            <Typography
+              sx={{
+                color: "#fff",
+                color: "#bbb",
+                fontSize: "16px",
+                fontWeight: "bold",
+              }}
+            >
+              مقاله
+            </Typography>
           </Box>
         </Box>
       </Box>
+
+      {/* <span className={styles.top}></span>
+      <span className={styles.right}></span>
+      <span className={styles.bottom}></span>
+      <span className={styles.left}></span> */}
     </Box>
   );
 }

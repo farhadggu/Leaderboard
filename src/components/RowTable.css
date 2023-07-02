@@ -1,0 +1,83 @@
+.parallelogram {
+  width: 100%;
+  height: 60px;
+  transform: skew(-20deg);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: all ease .3s;
+}
+
+.parallelogram:hover{
+  transform: scale(1.05) skew(-20deg);
+  transition: all ease .3s;
+}
+
+
+.inputForm {
+  background: transparent;
+  outline: none;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 4px;
+}
+
+
+@keyframes border-animation-gold {
+  0% {
+    border: 2px solid #e5ff00;
+  }
+  50% {
+    border: 2px solid #e5ff0091;
+  }
+  100% {
+    border: 2px solid #e5ff00;
+  }
+}
+
+.border-animation-gold {
+  animation: border-animation-gold 2s linear infinite;
+}
+
+@keyframes border-animation-sliver {
+  0% {
+    border: 2px solid #6fd2f5;
+  }
+  50% {
+    border: 2px solid #6fd1f58a;
+  }
+  100% {
+    border: 2px solid #6fd2f5;
+  }
+}
+
+.border-animation-sliver {
+  animation: border-animation-sliver 2s linear infinite;
+}
+
+@keyframes border-animation-bronze {
+  0% {
+    border: 2px solid #a76d30;
+  }
+  50% {
+    border: 2px solid #a76d307c;
+  }
+  100% {
+    border: 2px solid #a76d30;
+  }
+}
+
+.border-animation-bronze {
+  animation: border-animation-bronze 2s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .parallelogram{
+    height: 200px;
+    transform: skew(0);
+  }
+
+  .nonParallelogram{
+    transform: none !important;
+  }
+}

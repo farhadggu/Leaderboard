@@ -11,8 +11,8 @@
   list-style: none;
   box-sizing: border-box;
   font-family: FarhangFanum, sans-serif !important;
-  direction: rtl;
-  text-align: right;
+  direction: rtl !important;
+  text-align: right !important;
 }
 
 body {
@@ -22,10 +22,10 @@ body {
 .hexagon {
   width: 70px;
   height: 50px;
-  background-color: #171649;
+  background-color: #232268;
   position: absolute;
   transform: rotate(90deg);
-  margin-top: -20px;
+  margin-top: -35px;
   left: 6%;
 }
 
@@ -40,13 +40,13 @@ body {
 
 .hexagon::before {
   bottom: 100%;
-  border-bottom: 20px solid #171649;
+  border-bottom: 20px solid #232268;
 }
 
 .hexagon::after {
   top: 100%;
   width: 0;
-  border-top: 20px solid #171649;
+  border-top: 20px solid #232268;
 }
 
 .hexagon > img {
@@ -56,4 +56,12 @@ body {
   width: 60px;
   transform: rotate(270deg);
   z-index: 99;
+}
+
+.MuiTextField-root{
+  border-bottom: 1px solid #fff !important;
+}
+
+.MuiTextField-root label, .MuiTextField-root input {
+  color: #fff !important;
 }

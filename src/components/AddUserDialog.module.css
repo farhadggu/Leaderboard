@@ -1,0 +1,21 @@
+.dialogBoxContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 500px;
+  padding-top: 20px !important;
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .dialogBoxes {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .dialogBoxContent {
+    width: 320px;
+  }
+}
