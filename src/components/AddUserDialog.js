@@ -19,6 +19,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function AddUserDialog({ open, setOpen, getData }) {
   const [name, setName] = React.useState("");
   const [imageAddress, setImageAddress] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,22 +30,32 @@ export default function AddUserDialog({ open, setOpen, getData }) {
   };
 
   const handleSubmit = async () => {
-    await axios.post(`./${process.env.REACT_APP_BASEURL}/leaderboard`, {
-      name: name,
-      image: imageAddress
-    }, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    }).then((resp) => {
-      toast.success("کاربر با موفقیت افزوده شد")
-      getData()
-      handleClose()
-    }).catch((error) => {
-      console.log(error)
-      toast.error(error.response.data.message)
-    })
-  }
+    setLoading(true);
+    await axios
+      .post(
+        `./${process.env.REACT_APP_BASEURL}/leaderboard`,
+        {
+          name: name,
+          image: imageAddress,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((resp) => {
+        toast.success("کاربر با موفقیت افزوده شد");
+        getData();
+        handleClose();
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.response.data.message);
+        setLoading(false);
+      });
+  };
 
   return (
     <Dialog
@@ -71,8 +82,8 @@ export default function AddUserDialog({ open, setOpen, getData }) {
             style={{
               textAlign: "left !important",
               width: "100%",
-              color: "#fff !important" ,
-              marginBottom: "40px"
+              color: "#fff !important",
+              marginBottom: "40px",
             }}
           />
           <TextField

@@ -22,18 +22,22 @@ export default function AddFormulaDialog({ open, setOpen }) {
   const [firstState, setFirstState] = React.useState("");
   const [secondState, setSecondState] = React.useState("");
   const [thirdtState, setThirdState] = React.useState("");
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getData = async () => {
-    await axios.get(`./${process.env.REACT_APP_BASEURL}/weight`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }).then((resp) => {
-      setData(resp.data.data[0])
-    }).catch((error) => {
-      console.log(error)
-    })
+    await axios
+      .get(`./${process.env.REACT_APP_BASEURL}/weight`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((resp) => {
+        setData(resp.data.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleClickOpen = () => {
@@ -45,21 +49,32 @@ export default function AddFormulaDialog({ open, setOpen }) {
   };
 
   const handleSubmit = async () => {
-    await axios.post(`./${process.env.REACT_APP_BASEURL}/weight`, {
-      article: firstState,
-      news: secondState,
-      tool: thirdtState,
-    }, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    }).then((resp) => {
-      toast.success("فرمول تغییر یافت")
-      getData()
-    }).catch((error) => {
-      console.log(error)
-      toast.error(error.response.data.message)
-    })
+    setLoading(true);
+    await axios
+      .post(
+        `./${process.env.REACT_APP_BASEURL}/weight`,
+        {
+          article: firstState,
+          news: secondState,
+          tool: thirdtState,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((resp) => {
+        toast.success("فرمول تغییر یافت");
+        setLoading(false);
+
+        getData();
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.response.data.message);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -182,7 +197,11 @@ export default function AddFormulaDialog({ open, setOpen }) {
         <Button onClick={handleClose} sx={{ color: "#fff" }}>
           لغو
         </Button>
-        <Button onClick={() => handleSubmit()} sx={{ color: "#fff" }}>
+        <Button
+          disabled={loading}
+          onClick={() => handleSubmit()}
+          sx={{ color: "#fff" }}
+        >
           افزودن
         </Button>
       </DialogActions>

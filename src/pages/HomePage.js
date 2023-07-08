@@ -1,4 +1,11 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
 import styles from "./HomePage.module.css";
@@ -18,7 +25,7 @@ export default function HomePage() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  console.log(process.env.REACT_APP_BASEURL)
+  console.log(process.env.REACT_APP_BASEURL);
 
   const getData = async () => {
     setLoading(true);
@@ -74,7 +81,7 @@ export default function HomePage() {
           </Button>
         </Box>
       ) : (
-        <Box>
+        <Box sx={{ width: "fit-content" }}>
           <Link to="/login">
             <Button
               sx={{
@@ -108,9 +115,23 @@ export default function HomePage() {
           margin: "0 auto",
         }}
       >
-        {data.map((item, index) => (
-          <RowTable place={index + 1} item={item} getData={getData} />
-        ))}
+        {data.length > 0 ? (
+          data.map((item, index) => (
+            <RowTable place={index + 1} item={item} getData={getData} />
+          ))
+        ) : (
+          <Box
+            sx={{
+              margin: "0 auto",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "70vh"
+            }}
+          >
+            <CircularProgress sx={{color: "yellow", margin: "auto 0"}} />
+          </Box>
+        )}
       </Box>
 
       <AddUserDialog open={open} setOpen={setOpen} getData={getData} />

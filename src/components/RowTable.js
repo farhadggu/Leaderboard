@@ -20,13 +20,14 @@ export default function RowTable({ place, item, getData }) {
   });
   console.log(item);
 
-  const handleEdit = ({ name, tools, news, article }) => {
+  const handleEdit = ({ name, tools, news, article, score }) => {
     setEdit(true);
     setData({
       name: name,
       tools: tools,
       news: news,
       article: article,
+      score: score
     });
   };
 
@@ -104,7 +105,9 @@ export default function RowTable({ place, item, getData }) {
                 display: { xs: "none", sm: "flex" },
               }}
             >
-              {place == "1" ? (
+              {item.image ? (
+                <img src={item.image} width="50px" alt="user" />
+              ) : place == "1" ? (
                 <img src={"/rank1.webp"} width="50px" />
               ) : place == "2" ? (
                 <img src={"/immortal.webp"} width="50px" />
@@ -236,7 +239,7 @@ export default function RowTable({ place, item, getData }) {
                 gap: "10px",
               }}
             >
-              امتیاز : 48 <GiTrophyCup />
+              امتیاز : {data.score} <GiTrophyCup />
             </Typography>
           </>
         ) : (
@@ -399,6 +402,7 @@ export default function RowTable({ place, item, getData }) {
                       tools: item.tool,
                       news: item.news,
                       article: item.article,
+                      score: item.score
                     })
                   }
                   sx={{

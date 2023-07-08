@@ -8,7 +8,7 @@
 }
 
 .parallelogram:hover{
-  transform: scale(1.05) skew(-20deg);
+  transform: scale(1.01) skew(-20deg);
   transition: all ease .3s;
 }
 
