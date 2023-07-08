@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function Login() {
@@ -10,9 +10,9 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (localStorage.getItem("token")) {
-      localStorage.removeItem("token")
+      localStorage.removeItem("token");
     }
     await axios
       .post(`${process.env.REACT_APP_BASEURL}/login`, {
@@ -22,7 +22,7 @@ export default function Login() {
       .then((resp) => {
         toast.success("با موفقیت وارد شدید");
         navigate("/");
-        localStorage.setItem("token", resp.data.data.token)
+        localStorage.setItem("token", resp.data.data.token);
       })
       .catch((error) => {
         console.log(error);
@@ -43,18 +43,32 @@ export default function Login() {
         component="form"
         method="post"
       >
-        <Typography
-          sx={{
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: "22px",
-            textAlign: "center !important",
-            width: "100%",
-            marginBottom: "50px",
-          }}
-        >
-          ورود به حساب
-        </Typography>
+        <Box display="flex" alignItems="center" justifyContent="center">
+          <Typography
+            sx={{
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: "22px",
+              textAlign: "center !important",
+              width: "100%",
+              marginBottom: "50px",
+            }}
+          >
+            ورود به حساب
+          </Typography>
+          <Typography
+            sx={{
+              color: "#fff",
+              fontSize: "22px",
+              textAlign: "center !important",
+              width: "100%",
+              marginBottom: "50px",
+              textDecoration: "underline"
+            }}
+          >
+            <Link style={{ color: "#fff" }} to="/">صفحه اصلی</Link>
+          </Typography>
+        </Box>
         <TextField
           required
           id="standard-required"

@@ -10,6 +10,7 @@ import AddFormulaDialog from "../components/AddFormulaDialog";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const [open, setOpen] = React.useState(false);
@@ -42,7 +43,7 @@ export default function HomePage() {
 
   return (
     <Box maxWidth="xl" margin="50px auto">
-      {localStorage.getItem("token") && (
+      {localStorage.getItem("token") ? (
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Button
             sx={{
@@ -69,6 +70,24 @@ export default function HomePage() {
           >
             افزودن فرمول <FunctionsIcon />
           </Button>
+        </Box>
+      ) : (
+        <Box>
+          <Link to="/login">
+            <Button
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                border: "1px solid #ccc",
+                color: "#ccc",
+              }}
+              onClick={() => setOpen(true)}
+            >
+              ورود به حساب
+              <PersonAddAltIcon />
+            </Button>
+          </Link>
         </Box>
       )}
       <Box mt={4}>

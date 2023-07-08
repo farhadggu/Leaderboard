@@ -1,0 +1,14 @@
+version: '3'
+services:
+  client:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_BASE_URL=${REACT_APP_BASE_URL}
+    ports:
+      - "${PORT:-3000}:3000"
+    volumes:
+      - "./:/app"
+      - "./:/node_modules"
