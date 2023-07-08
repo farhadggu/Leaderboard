@@ -27,7 +27,7 @@ export default function RowTable({ place, item, getData }) {
       tools: tools,
       news: news,
       article: article,
-      score: score
+      score: score,
     });
   };
 
@@ -105,9 +105,7 @@ export default function RowTable({ place, item, getData }) {
                 display: { xs: "none", sm: "flex" },
               }}
             >
-              {item.image ? (
-                <img src={item.image} width="50px" alt="user" />
-              ) : place == "1" ? (
+              {place == "1" ? (
                 <img src={"/rank1.webp"} width="50px" />
               ) : place == "2" ? (
                 <img src={"/immortal.webp"} width="50px" />
@@ -116,6 +114,16 @@ export default function RowTable({ place, item, getData }) {
               ) : (
                 <img src={"/heralddot.webp"} width="50px" />
               )}
+            </Box>
+
+            <Box
+              sx={{
+                alignItems: "center",
+                justifyContent: "center",
+                display: { xs: "none", sm: "flex" },
+              }}
+            >
+              {item.image && <img src={item.image} width="50px" alt="user" />}
             </Box>
 
             <Typography
@@ -262,6 +270,16 @@ export default function RowTable({ place, item, getData }) {
               )}
             </Box>
 
+            <Box
+              sx={{
+                alignItems: "center",
+                justifyContent: "center",
+                display: { xs: "none", sm: "flex" },
+              }}
+            >
+              {item.image && <img src={item.image} width="50px" alt="user" />}
+            </Box>
+
             <Typography
               sx={{
                 fontSize: "22px",
@@ -402,7 +420,7 @@ export default function RowTable({ place, item, getData }) {
                       tools: item.tool,
                       news: item.news,
                       article: item.article,
-                      score: item.score
+                      score: item.score,
                     })
                   }
                   sx={{
