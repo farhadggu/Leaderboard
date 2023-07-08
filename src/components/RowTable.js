@@ -33,7 +33,7 @@ export default function RowTable({ place, item, getData }) {
   const handleSubmit = async (id) => {
     await axios
       .put(
-        `${process.env.REACT_APP_BASEURL}/leaderboard/${id}`,
+        `./${process.env.REACT_APP_BASEURL}/leaderboard/${id}`,
         {
           news: data.news,
           article: data.article,
@@ -57,7 +57,7 @@ export default function RowTable({ place, item, getData }) {
 
   const handleDelete = async (id) => {
     await axios
-      .delete(`${process.env.REACT_APP_BASEURL}/leaderboard/${id}`, {
+      .delete(`./${process.env.REACT_APP_BASEURL}/leaderboard/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

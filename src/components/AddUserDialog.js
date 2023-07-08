@@ -29,7 +29,7 @@ export default function AddUserDialog({ open, setOpen, getData }) {
   };
 
   const handleSubmit = async () => {
-    await axios.post(`${process.env.REACT_APP_BASEURL}/leaderboard`, {
+    await axios.post(`./${process.env.REACT_APP_BASEURL}/leaderboard`, {
       name: name,
       image: imageAddress
     }, {

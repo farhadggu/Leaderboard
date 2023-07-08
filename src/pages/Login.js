@@ -15,7 +15,7 @@ export default function Login() {
       localStorage.removeItem("token");
     }
     await axios
-      .post(`${process.env.REACT_APP_BASEURL}/login`, {
+      .post(`./${process.env.REACT_APP_BASEURL}/login`, {
         email,
         password,
       })

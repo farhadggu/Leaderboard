@@ -18,10 +18,12 @@ export default function HomePage() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  console.log(process.env.REACT_APP_BASEURL)
+
   const getData = async () => {
     setLoading(true);
     await axios
-      .get(`${process.env.REACT_APP_BASEURL}/leaderboard`, {
+      .get(`./${process.env.REACT_APP_BASEURL}/leaderboard`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

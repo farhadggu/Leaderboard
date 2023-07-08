@@ -25,7 +25,7 @@ export default function AddFormulaDialog({ open, setOpen }) {
   const [data, setData] = useState([])
 
   const getData = async () => {
-    await axios.get(`${process.env.REACT_APP_BASEURL}/weight`, {
+    await axios.get(`./${process.env.REACT_APP_BASEURL}/weight`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -45,7 +45,7 @@ export default function AddFormulaDialog({ open, setOpen }) {
   };
 
   const handleSubmit = async () => {
-    await axios.post(`${process.env.REACT_APP_BASEURL}/weight`, {
+    await axios.post(`./${process.env.REACT_APP_BASEURL}/weight`, {
       article: firstState,
       news: secondState,
       tool: thirdtState,
