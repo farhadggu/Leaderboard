@@ -30,7 +30,7 @@ export default function HomePage() {
   const getData = async () => {
     setLoading(true);
     await axios
-      .get(`./${process.env.REACT_APP_BASEURL}/leaderboard`, {
+      .get(`${process.env.REACT_APP_BASEURL}/leaderboard`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -59,8 +59,8 @@ export default function HomePage() {
               display: "flex",
               alignItems: "center",
               gap: "10px",
-              border: "1px solid #ccc",
-              color: "#ccc",
+              border: "1px solid #000",
+              color: "#000",
             }}
             onClick={() => setOpen(true)}
           >
@@ -72,8 +72,8 @@ export default function HomePage() {
               display: "flex",
               alignItems: "center",
               gap: "10px",
-              border: "1px solid #ccc",
-              color: "#ccc",
+              border: "1px solid #000",
+              color: "#000",
             }}
             onClick={() => setOpenFormula(true)}
           >
@@ -102,6 +102,7 @@ export default function HomePage() {
       <Box mt={4}>
         <Grid container maxWidth="md" columnGap={2} rowGap={2} margin="0 auto">
           {data.map((item, index) => (
+            index < 3 &&
             <Grid item xs={12} sm={3.8} md={3.8}>
               <Card place={index + 1} item={item} />
             </Grid>

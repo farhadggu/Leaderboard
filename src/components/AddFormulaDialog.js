@@ -27,7 +27,7 @@ export default function AddFormulaDialog({ open, setOpen }) {
 
   const getData = async () => {
     await axios
-      .get(`./${process.env.REACT_APP_BASEURL}/weight`, {
+      .get(`${process.env.REACT_APP_BASEURL}/weight`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -52,7 +52,7 @@ export default function AddFormulaDialog({ open, setOpen }) {
     setLoading(true);
     await axios
       .post(
-        `./${process.env.REACT_APP_BASEURL}/weight`,
+        `${process.env.REACT_APP_BASEURL}/weight`,
         {
           article: firstState,
           news: secondState,
@@ -67,7 +67,7 @@ export default function AddFormulaDialog({ open, setOpen }) {
       .then((resp) => {
         toast.success("فرمول تغییر یافت");
         setLoading(false);
-
+        handleClose()
         getData();
       })
       .catch((error) => {
@@ -90,11 +90,11 @@ export default function AddFormulaDialog({ open, setOpen }) {
       aria-describedby="alert-dialog-slide-description"
       className={styles.dialogBox}
     >
-      <DialogTitle sx={{ background: "#12123a", color: "#fff" }}>
+      <DialogTitle sx={{ background: "#fafcfe", color: "#000" }}>
         افزودن فرمول
       </DialogTitle>
       <DialogContent
-        sx={{ background: "#12123a", color: "#fff", paddingTop: "60px" }}
+        sx={{ background: "#fafcfe", color: "#000", paddingTop: "60px" }}
       >
         <Box sx={{ marginTop: "20px" }}></Box>
         <Box
@@ -112,7 +112,7 @@ export default function AddFormulaDialog({ open, setOpen }) {
               width: "fit-content",
               border: "1px solid #ccc",
               padding: "10px",
-              background: "#12123a",
+              background: "#fafcfe",
               borderRadius: "5px",
             }}
           >
@@ -158,7 +158,7 @@ export default function AddFormulaDialog({ open, setOpen }) {
             style={{
               textAlign: "left !important",
               width: "100%",
-              color: "#fff !important",
+              color: "#000 !important",
               marginBottom: "20px",
             }}
           />
@@ -173,7 +173,7 @@ export default function AddFormulaDialog({ open, setOpen }) {
             style={{
               textAlign: "left !important",
               width: "100%",
-              color: "#fff !important",
+              color: "#000 !important",
               marginBottom: "20px",
             }}
           />
@@ -188,19 +188,19 @@ export default function AddFormulaDialog({ open, setOpen }) {
             style={{
               textAlign: "left !important",
               width: "100%",
-              color: "#fff !important",
+              color: "#000 !important",
             }}
           />
         </Box>
       </DialogContent>
-      <DialogActions sx={{ background: "#12123a" }}>
-        <Button onClick={handleClose} sx={{ color: "#fff" }}>
+      <DialogActions sx={{ background: "#fafcfe" }}>
+        <Button onClick={handleClose} sx={{ color: "#000" }}>
           لغو
         </Button>
         <Button
-          disabled={loading}
+          disabled={loading || !firstState || !secondState || !thirdtState}
           onClick={() => handleSubmit()}
-          sx={{ color: "#fff" }}
+          sx={{ color: "#000" }}
         >
           افزودن
         </Button>

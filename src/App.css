@@ -16,16 +16,16 @@
 }
 
 body {
-  background: #12123a;
+  background: #fafcfe;
 }
 
 .hexagon {
   width: 70px;
   height: 50px;
-  background-color: #232268;
+  /* background-color: #232268; */
   position: absolute;
   transform: rotate(90deg);
-  margin-top: -35px;
+  margin-top: -40px;
   left: 6%;
 }
 
@@ -40,13 +40,13 @@ body {
 
 .hexagon::before {
   bottom: 100%;
-  border-bottom: 20px solid #232268;
+  /* border-bottom: 20px solid #232268; */
 }
 
 .hexagon::after {
   top: 100%;
   width: 0;
-  border-top: 20px solid #232268;
+  /* border-top: 20px solid #232268; */
 }
 
 .hexagon > img {
@@ -63,5 +63,5 @@ body {
 }
 
 .MuiTextField-root label, .MuiTextField-root input {
-  color: #fff !important;
+  color: #000 !important;
 }

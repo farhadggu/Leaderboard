@@ -33,7 +33,7 @@ export default function AddUserDialog({ open, setOpen, getData }) {
     setLoading(true);
     await axios
       .post(
-        `./${process.env.REACT_APP_BASEURL}/leaderboard`,
+        `${process.env.REACT_APP_BASEURL}/leaderboard`,
         {
           name: name,
           image: imageAddress,
@@ -66,10 +66,10 @@ export default function AddUserDialog({ open, setOpen, getData }) {
       aria-describedby="alert-dialog-slide-description"
       className={styles.dialogBox}
     >
-      <DialogTitle sx={{ background: "#12123a", color: "#fff" }}>
+      <DialogTitle sx={{ background: "#fafcfe", color: "#000" }}>
         افزودن کاربر
       </DialogTitle>
-      <DialogContent sx={{ background: "#12123a", color: "#fff" }}>
+      <DialogContent sx={{ background: "#fafcfe", color: "#000" }}>
         <Box>
           <TextField
             required
@@ -82,7 +82,7 @@ export default function AddUserDialog({ open, setOpen, getData }) {
             style={{
               textAlign: "left !important",
               width: "100%",
-              color: "#fff !important",
+              color: "#000 !important",
               marginBottom: "40px",
             }}
           />
@@ -97,16 +97,16 @@ export default function AddUserDialog({ open, setOpen, getData }) {
             style={{
               textAlign: "left !important",
               width: "100%",
-              color: "#fff !important",
+              color: "#000 !important",
             }}
           />
         </Box>
       </DialogContent>
-      <DialogActions sx={{ background: "#12123a" }}>
-        <Button onClick={handleClose} sx={{ color: "#fff" }}>
+      <DialogActions sx={{ background: "#fafcfe" }}>
+        <Button onClick={handleClose} sx={{ color: "#000" }}>
           لغو
         </Button>
-        <Button onClick={() => handleSubmit()} sx={{ color: "#fff" }}>
+        <Button onClick={() => handleSubmit()} sx={{ color: "#000" }} disabled={!name}>
           افزودن
         </Button>
       </DialogActions>

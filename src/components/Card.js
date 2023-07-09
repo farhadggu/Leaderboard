@@ -9,10 +9,16 @@ export default function Card({ place, item }) {
   return (
     <Box
       sx={{
-        background: "#21214a",
+        background: "#ffffff",
         height: "350px",
         borderRadius: "20px",
         border: "1px solid #eee",
+        boxShadow: "0px 20px 20px 13px rgb(0 0 0 / 6%)",
+        transition: "all ease .3s",
+        "&:hover": {
+          transform: "scale(1.03)",
+          transition: "all ease .3s"
+        }
       }}
       // className={styles.card}
     >
@@ -20,7 +26,7 @@ export default function Card({ place, item }) {
         sx={{
           background:
             place == "1"
-              ? "radial-gradient(circle, rgba(246,244,171,1) 0%, rgba(226,240,209,1) 35%, rgba(18,18,58,1) 100%)"
+              ? "linear-gradient(90deg, rgba(242,250,193,1) 0%, rgba(214,229,30,1) 35%, rgba(18,18,58,1) 100%)"
               : place == "2"
               ? "radial-gradient(circle, rgba(159,241,234,1) 0%, rgba(239,231,249,1) 35%, rgba(18,18,58,1) 100%)"
               : place == "3"
@@ -28,7 +34,7 @@ export default function Card({ place, item }) {
               : "",
           height: "80px",
           borderTopLeftRadius: "20px",
-          borderTopRightRadius: "20px",
+          borderTopRightRadius: "20px"
         }}
       >
         <Typography
@@ -65,15 +71,16 @@ export default function Card({ place, item }) {
         >
           <Typography
             sx={{
-              color: "#fff",
-              background: "#25244e",
+              color: "#000",
               border: "1px solid #ccc",
+              borderLeft: "none",
               padding: "4px 16px",
               fontSize: "12px",
               display: "flex",
               alignItems: "center",
               gap: "10px",
-              borderRadius: "5px",
+              borderTopRightRadius: "5px",
+              borderBottomRightRadius: "5px",
             }}
           >
             امتیاز : {item.score}{" "}
@@ -87,7 +94,6 @@ export default function Card({ place, item }) {
               ""
             )}
           </Typography>
-          <BiLogoAirbnb style={{ color: "#fff", fontSize: "22px" }} />
         </Box>
 
         <Box
@@ -99,7 +105,7 @@ export default function Card({ place, item }) {
           mt={3}
         >
           <Typography
-            sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}
+            sx={{ color: "#000", fontSize: "22px", fontWeight: "bold" }}
           >
             {item.name}
           </Typography>
@@ -127,13 +133,13 @@ export default function Card({ place, item }) {
             justifyContent="start"
           >
             <Typography
-              sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}
+              sx={{ color: "#000", fontSize: "22px", fontWeight: "bold" }}
             >
               {item.news}
             </Typography>
             <Typography
               sx={{
-                color: "#fff",
+                color: "#000",
                 color: "#bbb",
                 fontSize: "16px",
                 fontWeight: "bold",
@@ -149,13 +155,13 @@ export default function Card({ place, item }) {
             justifyContent="start"
           >
             <Typography
-              sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}
+              sx={{ color: "#000", fontSize: "22px", fontWeight: "bold" }}
             >
               {item.tool}
             </Typography>
             <Typography
               sx={{
-                color: "#fff",
+                color: "#000",
                 color: "#bbb",
                 fontSize: "16px",
                 fontWeight: "bold",
@@ -171,13 +177,13 @@ export default function Card({ place, item }) {
             justifyContent="start"
           >
             <Typography
-              sx={{ color: "#fff", fontSize: "22px", fontWeight: "bold" }}
+              sx={{ color: "#000", fontSize: "22px", fontWeight: "bold" }}
             >
               {item.article}
             </Typography>
             <Typography
               sx={{
-                color: "#fff",
+                color: "#000",
                 color: "#bbb",
                 fontSize: "16px",
                 fontWeight: "bold",

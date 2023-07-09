@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useState } from "react";
 import styles from "./RowTable.css";
 import EditIcon from "@mui/icons-material/Edit";
@@ -18,7 +18,8 @@ export default function RowTable({ place, item, getData }) {
     article: "",
     score: "",
   });
-  console.log(item);
+  const [loadEdit, setLoadEdit] = useState(false);
+  const [loadDelete, setLoadDelete] = useState(false);
 
   const handleEdit = ({ name, tools, news, article, score }) => {
     setEdit(true);
@@ -32,13 +33,16 @@ export default function RowTable({ place, item, getData }) {
   };
 
   const handleSubmit = async (id) => {
+    setLoadEdit(true);
     await axios
       .put(
-        `./${process.env.REACT_APP_BASEURL}/leaderboard/${id}`,
+        `${process.env.REACT_APP_BASEURL}/leaderboard/${id}`,
         {
+          name: data.name,
           news: data.news,
           article: data.article,
           tool: data.tools,
+          score: data.score,
         },
         {
           headers: {
@@ -50,15 +54,18 @@ export default function RowTable({ place, item, getData }) {
         toast.success("اطلاعات با موفقیت ویرایش یافت");
         getData();
         setEdit(false);
+        setLoadEdit(false);
       })
       .catch((error) => {
         toast.error(error.response.data.message);
+        setLoadEdit(false);
       });
   };
 
   const handleDelete = async (id) => {
+    setLoadDelete(true);
     await axios
-      .delete(`./${process.env.REACT_APP_BASEURL}/leaderboard/${id}`, {
+      .delete(`${process.env.REACT_APP_BASEURL}/leaderboard/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -66,9 +73,11 @@ export default function RowTable({ place, item, getData }) {
       .then((resp) => {
         toast.success("کاربر مورد نظر حذف شد");
         getData();
+        setLoadDelete(false);
       })
       .catch((error) => {
         toast.error(error.response.data.message);
+        setLoadDelete(false);
       });
   };
 
@@ -84,6 +93,7 @@ export default function RowTable({ place, item, getData }) {
           : ""
       }`}
       mt={4}
+      sx={{background: "#f8f8f8", boxShadow: "0px 20px 20px 13px rgb(0 0 0 / 6%)",}}
     >
       <Box
         className="nonParallelogram"
@@ -136,7 +146,7 @@ export default function RowTable({ place, item, getData }) {
                     ? "#6fd2f5"
                     : place == 3
                     ? "#a76d30"
-                    : "#fff",
+                    : "#000",
                 fontWeight: "bold",
               }}
             >
@@ -149,7 +159,7 @@ export default function RowTable({ place, item, getData }) {
               gap="10px"
               justifyContent="center"
             >
-              <Typography sx={{ fontWeight: "bold", color: "#fff" }}>
+              <Typography sx={{ fontWeight: "bold", color: "#000" }}>
                 نام :{" "}
               </Typography>
               <input
@@ -170,7 +180,7 @@ export default function RowTable({ place, item, getData }) {
                 flexDirection: { xs: "direction", md: "row" },
               }}
             >
-              <Typography sx={{ fontWeight: "bold", color: "#fff" }}>
+              <Typography sx={{ fontWeight: "bold", color: "#000" }}>
                 اخبار :{" "}
               </Typography>
               <input
@@ -191,7 +201,7 @@ export default function RowTable({ place, item, getData }) {
                 flexDirection: { xs: "direction", md: "row" },
               }}
             >
-              <Typography sx={{ fontWeight: "bold", color: "#fff" }}>
+              <Typography sx={{ fontWeight: "bold", color: "#000" }}>
                 ابزار :{" "}
               </Typography>
               <input
@@ -214,7 +224,7 @@ export default function RowTable({ place, item, getData }) {
                 flexDirection: { sm: "column", md: "row" },
               }}
             >
-              <Typography sx={{ fontWeight: "bold", color: "#fff" }}>
+              <Typography sx={{ fontWeight: "bold", color: "#000" }}>
                 مقاله :{" "}
               </Typography>
               <input
@@ -228,27 +238,28 @@ export default function RowTable({ place, item, getData }) {
               />
             </Box>
 
-            <Typography
+            <Box
+              display="flex"
+              alignItems="center"
+              gap="10px"
+              justifyContent="center"
               sx={{
-                color: "#fff",
-                border: `1px solid ${
-                  place == 1
-                    ? "#e5ff00"
-                    : place == 2
-                    ? "#6fd2f5"
-                    : place == 3
-                    ? "#a76d30"
-                    : "#ccc"
-                }`,
-                padding: "5px 20px",
-                borderRadius: "5px",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
+                flexDirection: { xs: "direction", md: "row" },
               }}
             >
-              امتیاز : {data.score} <GiTrophyCup />
-            </Typography>
+              <Typography sx={{ fontWeight: "bold", color: "#000" }}>
+                امتیاز :{" "}
+              </Typography>
+              <input
+                className="inputForm"
+                type="text"
+                value={data.score}
+                onChange={(e) =>
+                  setData({ ...data, ["score"]: e.target.value })
+                }
+                placeholder="امتیاز"
+              />
+            </Box>
           </>
         ) : (
           <>
@@ -290,7 +301,7 @@ export default function RowTable({ place, item, getData }) {
                     ? "#6fd2f5"
                     : place == 3
                     ? "#a76d30"
-                    : "#fff",
+                    : "#000",
                 fontWeight: "bold",
               }}
             >
@@ -304,10 +315,10 @@ export default function RowTable({ place, item, getData }) {
               justifyContent="center"
               sx={{ flexDirection: { xs: "column", sm: "row" } }}
             >
-              <Typography sx={{ fontWeight: "bold", color: "#fff" }}>
+              <Typography sx={{ fontWeight: "bold", color: "#000" }}>
                 نام :{" "}
               </Typography>
-              <Typography sx={{ color: "#fff" }}>{item.name}</Typography>
+              <Typography sx={{ color: "#000" }}>{item.name}</Typography>
             </Box>
 
             <Box
@@ -317,10 +328,10 @@ export default function RowTable({ place, item, getData }) {
               justifyContent="center"
               sx={{ flexDirection: { xs: "column", sm: "row" } }}
             >
-              <Typography sx={{ fontWeight: "bold", color: "#fff" }}>
+              <Typography sx={{ fontWeight: "bold", color: "#000" }}>
                 اخبار :{" "}
               </Typography>
-              <Typography sx={{ color: "#fff" }}>{item.news}</Typography>
+              <Typography sx={{ color: "#000" }}>{item.news}</Typography>
             </Box>
 
             <Box
@@ -330,10 +341,10 @@ export default function RowTable({ place, item, getData }) {
               justifyContent="center"
               sx={{ flexDirection: { xs: "column", sm: "row" } }}
             >
-              <Typography sx={{ fontWeight: "bold", color: "#fff" }}>
+              <Typography sx={{ fontWeight: "bold", color: "#000" }}>
                 ابزار :{" "}
               </Typography>
-              <Typography sx={{ color: "#fff" }}>{item.tool}</Typography>
+              <Typography sx={{ color: "#000" }}>{item.tool}</Typography>
             </Box>
 
             <Box
@@ -343,15 +354,15 @@ export default function RowTable({ place, item, getData }) {
               justifyContent="center"
               sx={{ flexDirection: { xs: "column", sm: "row" } }}
             >
-              <Typography sx={{ fontWeight: "bold", color: "#fff" }}>
+              <Typography sx={{ fontWeight: "bold", color: "#000" }}>
                 مقاله :{" "}
               </Typography>
-              <Typography sx={{ color: "#fff" }}>{item.article}</Typography>
+              <Typography sx={{ color: "#000" }}>{item.article}</Typography>
             </Box>
 
             <Typography
               sx={{
-                color: "#fff",
+                color: "#000",
                 border: `1px solid ${
                   place == 1
                     ? "#e5ff00"
@@ -377,24 +388,50 @@ export default function RowTable({ place, item, getData }) {
           <Box display="flex" alignItems="center" gap="20px">
             {edit ? (
               <>
-                <Typography
-                  onClick={() => handleSubmit(item.id)}
-                  sx={{
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    borderBottom: "1px solid #ccc",
-                    gap: "10px",
-                    fontSize: "14px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <DoneIcon sx={{ fontSize: "16px" }} /> ثبت
-                </Typography>
+                {loadEdit ? (
+                  <Typography
+                    onClick={() =>
+                      handleEdit({
+                        name: item.name,
+                        tools: item.tool,
+                        news: item.news,
+                        article: item.article,
+                        score: item.score,
+                      })
+                    }
+                    sx={{
+                      color: "#000",
+                      display: "flex",
+                      alignItems: "center",
+                      borderBottom: "1px solid #ccc",
+                      gap: "10px",
+                      fontSize: "14px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    صبر کنید ...
+                  </Typography>
+                ) : (
+                  <Typography
+                    onClick={() => handleSubmit(item.id)}
+                    sx={{
+                      color: "#000",
+                      display: "flex",
+                      alignItems: "center",
+                      borderBottom: "1px solid #ccc",
+                      gap: "10px",
+                      fontSize: "14px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <DoneIcon sx={{ fontSize: "16px" }} /> ثبت
+                  </Typography>
+                )}
+
                 <Typography
                   onClick={() => setEdit(false)}
                   sx={{
-                    color: "#fff",
+                    color: "#000",
                     display: "flex",
                     alignItems: "center",
                     borderBottom: "1px solid #ccc",
@@ -413,42 +450,84 @@ export default function RowTable({ place, item, getData }) {
                 gap="10px"
                 sx={{ flexDirection: { xs: "column", md: "row" } }}
               >
-                <Typography
-                  onClick={() =>
-                    handleEdit({
-                      name: item.name,
-                      tools: item.tool,
-                      news: item.news,
-                      article: item.article,
-                      score: item.score,
-                    })
-                  }
-                  sx={{
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    borderBottom: "1px solid #ccc",
-                    gap: "10px",
-                    fontSize: "14px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <EditIcon sx={{ fontSize: "16px" }} /> ویرایش
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    borderBottom: "1px solid #ccc",
-                    gap: "10px",
-                    fontSize: "14px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => handleDelete(item.id)}
-                >
-                  <DeleteIcon sx={{ fontSize: "16px" }} /> حذف
-                </Typography>
+                {loadEdit ? (
+                  <Typography
+                    onClick={() =>
+                      handleEdit({
+                        name: item.name,
+                        tools: item.tool,
+                        news: item.news,
+                        article: item.article,
+                        score: item.score,
+                      })
+                    }
+                    sx={{
+                      color: "#000",
+                      display: "flex",
+                      alignItems: "center",
+                      borderBottom: "1px solid #ccc",
+                      gap: "10px",
+                      fontSize: "14px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <CircularProgress sx={{ color: "#000" }} />
+                  </Typography>
+                ) : (
+                  <Typography
+                    onClick={() =>
+                      handleEdit({
+                        name: item.name,
+                        tools: item.tool,
+                        news: item.news,
+                        article: item.article,
+                        score: item.score,
+                      })
+                    }
+                    sx={{
+                      color: "#000",
+                      display: "flex",
+                      alignItems: "center",
+                      borderBottom: "1px solid #ccc",
+                      gap: "10px",
+                      fontSize: "14px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <EditIcon sx={{ fontSize: "16px" }} /> ویرایش
+                  </Typography>
+                )}
+                {loadDelete ? (
+                  <Typography
+                    sx={{
+                      color: "#000",
+                      display: "flex",
+                      alignItems: "center",
+                      borderBottom: "1px solid #ccc",
+                      gap: "10px",
+                      fontSize: "14px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    صبر کنید ...
+                  </Typography>
+                ) : (
+                  <Typography
+                    sx={{
+                      color: "#000",
+                      display: "flex",
+                      alignItems: "center",
+                      borderBottom: "1px solid #ccc",
+                      gap: "10px",
+                      fontSize: "14px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    <DeleteIcon sx={{ fontSize: "16px" }} /> حذف
+                  </Typography>
+                )}
               </Box>
             )}
           </Box>
